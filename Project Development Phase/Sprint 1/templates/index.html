@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% block content%}
+{% if success%}
+<div class="container-fluid position-fixed z">
+    <div class="mt-4 float-end">
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <i class="fas fa-check-circle"></i> &nbsp;{{ success }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    </div>
+</div>
+{% endif%}
+
+{% if danger%}
+<div class="container-fluid position-fixed z">
+  <div class="mt-4 float-end">
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+     <i class="fas fa-exclamation-triangle"></i> &nbsp; {{ danger }}
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+ </div>
+</div>
+{% endif %}
+
+<div class="container-fluid h-custom pb-5" style="margin-top:3%;">
+  <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1 mt-5 mb-5">
+          <div class="line me-5" style="margin-top: 8rem; margin-left: 5px;">
+            <h2 class="h1" style="font-size: 60px; font-weight:bolder"> Hello!!! Welcome to our application </h2>
+            <h4 class="h4"> Your Personal Expense Tracker </h4>
+          </div>
+
+          {% if not current_user.is_authenticated %}
+          <button onclick="location.href='{{url_for('login')}}'" class="btn btn-primary px-4 mt-5 py-2 me-3" style="font-size:22px; border-radius: 25px; background-color:#a83279; outline: none; border: none;"> Login </button>
+          <button onclick="location.href='{{url_for('signup')}}'" class="btn btn-danger px-4 mt-5 py-2" style="font-size:22px; border-radius: 25px; background-color:#d38312; outline: none; border: none;"> signup </button>
+          {% endif %}
+
+          {% if current_user.is_authenticated %}
+          <button onclick="location.href='{{url_for('logout')}}'" class="btn btn-primary px-4 mt-5 py-2 me-3" style="font-size:22px; border-radius: 25px; background-color:#a83279; outline: none; border: none;"> Logout </button>
+          {% endif %}
+
+        </div>
+        <div class="col-md-9 col-lg-6 col-xl-5 mt-5">
+          <img src="https://expensetrackerapplication.s3.jp-tok.cloud-object-storage.appdomain.cloud/index.png" alt="Index Logo"
+            class="img-fluid login_logo">
+        </div>
+      </div>
+  </div>
+
+{% endblock%}
